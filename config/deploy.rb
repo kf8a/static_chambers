@@ -13,7 +13,7 @@ set :use_sudo, false
 
 set :branch, "master"
 set :deploy_via, :copy
-set :git_enable_submodules,0
+set :git_enable_submodules,1
 
 set :mongrel_conf, '/etc/mongrel_cluster/webgas.yml'
 

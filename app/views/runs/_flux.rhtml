@@ -1,0 +1,11 @@
+<div id="flux_<%=flux.id%>">
+
+	<%= plot(flux)%>
+
+	<br/>Flux: <%= number_with_precision(flux.flux)%> g/ha day<br/>
+	<%=h flux.comment %>
+	
+	<% for sample in flux.samples%>
+		<%= sample.vial %>
+	<% end %>
+</div>

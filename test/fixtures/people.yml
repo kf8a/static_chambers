@@ -1,0 +1,8 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+first:
+  id: 1
+  username: "bohms"
+  password_salt: "n3O7G78Y"
+  password_hash: "44e0254b9522c96286e99cd6663dd9aea622792fd82a50f5e143a43f0d41b62e"
+another:
+  id: 2

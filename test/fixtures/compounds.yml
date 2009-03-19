@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+carbon_dioxide:
+  id: 1
+  name: 'co2'
+
+nitrous_oxide:
+  id: 2
+  name: 'n2o'
+
+methane: 
+  id: 3
+  name: 'ch4'
+

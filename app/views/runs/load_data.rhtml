@@ -1,0 +1,15 @@
+<h1><%= @run.name %></h1>
+
+<% form_for(@run,  :url => data_run_path,  :html => {:multipart => true}) do |f| %>
+
+<p><label for="run_run_on">Run on</label><br/>
+<%= f.date_select :run_on %></p>
+<p><label for="datafile">Data file</label><br/>
+<%= file_field :file, :name %>
+</p>
+<p><label for="run_comment">Comment</label><br/>
+<%= f.text_area :comment, "rows" => 3 %></p>  
+<%= f.submit "data" %>
+<% end %>
+
+<%= link_to 'Back', runs_path %>

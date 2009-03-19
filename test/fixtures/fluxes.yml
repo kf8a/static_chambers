@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+flux_from_plot_1:
+  id: 1
+  incubation_id: 1
+  flux: 4.3
+  compound_id: 1
+flux_from_plot_2:
+  id: 2
+  incubation_id: 1
+  flux: 2.4
+  compound_id: 2

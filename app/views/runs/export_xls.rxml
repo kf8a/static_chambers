@@ -1,0 +1,62 @@
+xml.instruct! :xml, :version=>"1.0", :encoding=>"UTF-8" 
+xml.Workbook({
+  'xmlns'      => "urn:schemas-microsoft-com:office:spreadsheet", 
+  'xmlns:o'    => "urn:schemas-microsoft-com:office:office",
+  'xmlns:x'    => "urn:schemas-microsoft-com:office:excel",    
+  'xmlns:html' => "http://www.w3.org/TR/REC-html40",
+  'xmlns:ss'   => "urn:schemas-microsoft-com:office:spreadsheet" 
+  }) do
+
+    xml.Styles do
+      xml.Style 'ss:ID' => 'Default', 'ss:Name' => 'Normal' do
+        xml.Alignment 'ss:Vertical' => 'Bottom'
+        xml.Borders
+        xml.Font 'ss:FontName' => 'Verdana'
+        xml.Interior
+        xml.NumberFormat
+        xml.Protection
+      end
+      xml.Style 'ss:ID' => 's22' do
+        xml.NumberFormat 'ss:Format' => 'General Date'
+      end
+      xml.Style 'ss:ID' => 's21' do
+        xml.NumberFormat
+      end
+    end
+
+    xml.Worksheet 'ss:Name' => @run.name do
+      xml.Table do
+
+        # Header
+        xml.Row do
+          xml.Cell { xml.Data 'Date', 'ss:Type' => 'String'}
+          xml.Cell { xml.Data 'Treatment', 'ss:Type' => 'String' }
+          xml.Cell { xml.Data 'Replicate', 'ss:Type' => 'String' }
+          xml.Cell { xml.Data 'Soil Temperature', 'ss:Type' => 'String'}
+          xml.Cell { xml.Data 'N2O', 'ss:Type' => 'String'}
+          xml.Cell { xml.Data 'CO2', 'ss:Type' => 'String'}
+          xml.Cell { xml.Data 'CH4', 'ss:Type' => 'String'}
+        end
+
+        # Rows
+        @run.incubations.each do | incubation |
+          xml.Row do
+            xml.Cell do
+              xml.Data @run.sampled_on, 'ss:Type' => 'String'
+            end
+            xml.Cell { xml.Data incubation.treatment, 'ss:Type' => 'String'}
+            xml.Cell { xml.Data incubation.replicate, 'ss:Type' => 'String'}
+            xml.Cell 'ss:StyleID' => 's21' do
+              xml.Data incubation.soil_temperature, 'ss:Type' => 'Number' unless incubation.soil_temperature.nil?
+            end
+            incubation.fluxes.each do | flux |
+              xml.Cell  'ss:StyleID' => 's21' do 
+                xml.Data flux.flux, 'ss:Type' => 'Number' unless flux.flux.nan?
+              end
+            end
+          end
+        end
+      end
+    end
+end
+

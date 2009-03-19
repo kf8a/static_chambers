@@ -1,0 +1,32 @@
+<h1><%= @run.name %></h1>
+
+<%= link_to 'Back', runs_path %>
+<p>
+Sampled on: <%= @run.sampled_on %><br/>
+Run on: <%= @run.run_on %><br/>
+</p>
+
+<%= button_to approve_string(@run), {:action => :approve, :id => @run } %>
+
+<table>
+<% @run.incubations.each do | incubation | %>
+
+<tr>
+	<th>Sample</th>
+	<th>N2O<br/>Y = <%= incubation.fluxes[0].maxy%> ppm, X = <%= incubation.fluxes[0].maxx%> min</th>
+	<th>CO2<br/>Y = <%= incubation.fluxes[1].maxy%> ppm, X = <%= incubation.fluxes[1].maxx%> min</th>
+	<th>CH4<br/>Y = <%= incubation.fluxes[2].maxy%> ppm, X = <%= incubation.fluxes[2].maxx %> min</th>
+</tr>
+
+<tr>
+	<td>T<%=incubation.treatment %>R<%= incubation.replicate %></td>
+  <% incubation.fluxes.each do | flux | %>
+  <td><%= render :partial => 'flux', :locals => {:flux => flux} %>
+  </td>
+  <% end %>
+</tr>
+<% end %>
+</table>
+
+<%= link_to 'Edit', :action => 'edit', :id => @run %> |
+<%= link_to 'Back', runs_path %>

@@ -1,0 +1,18 @@
+<%= error_messages_for 'run' %>
+
+<!--[form:run]-->
+
+<p><label for="run_name">Name</label><br/>
+<%= text_field 'run', 'name' %></p>
+<p><label for="run_sampled_on">Sampled On</label><br/>
+<%= date_select 'run', 'sampled_on' %></p>
+<p><label for="run_run_on">Run on</label><br/>
+<%= date_select "run", "run_on" %></p>
+<p><label for="datafile">Data file</label><br/>
+<input type="file" name="file_name"/>
+</p>
+<p><label for="run_comment">Comment</label><br/>
+<%= text_area "run", "comment", 'rows' => '3' %></p>
+
+<!--[eoform:run]-->
+

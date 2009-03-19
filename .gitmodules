@@ -1,3 +1,6 @@
+[submodule "vendor/plugins/exception_notifier"]
+	path = vendor/plugins/exception_notifier
+	url = git://github.com/rails/exception_notification.git
 [submodule "vendor/plugins/authlogic"]
 	path = vendor/plugins/authlogic
 	url = git://github.com/binarylogic/authlogic.git
@@ -7,6 +10,9 @@
 [submodule "vendor/plugins/factory_girl"]
 	path = vendor/plugins/factory_girl
 	url = git://github.com/thoughtbot/factory_girl.git
+[submodule "vendor/plugins/rr"]
+	path = vendor/plugins/rr
+	url = git://github.com/btakita/rr.git
 [submodule "vendor/plugins/will_paginate"]
 	path = vendor/plugins/will_paginate
 	url = git://github.com/mislav/will_paginate.git

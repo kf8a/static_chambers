@@ -1,5 +1,6 @@
 set :application, "webgas"
-set :repository,  "http://kf8a.textdriven.com/svn/lter/webgas"
+set :repository,  "/Users/bohms/code/webgas1.5"
+set :scm, :git
 
 # If you aren't deploying to /u/apps/#{application} on the target
 # servers (which is the default), you can specify the actual location
@@ -7,18 +8,18 @@ set :repository,  "http://kf8a.textdriven.com/svn/lter/webgas"
 # set :deploy_to, "/var/www/#{application}"
 set :deploy_to, "/var/u/apps/#{application}"
 
-# If you aren't using Subversion to manage your source code, specify
-# your SCM below:
-# set :scm, :subversion
-
 set :user, 'deploy'
 set :use_sudo, false
 
+set :branch, "master"
+set :deploy_via, :copy
+set :git_enable_submodules,0
+
 set :mongrel_conf, '/etc/mongrel_cluster/webgas.yml'
 
-role :app, "houghton.kbs.msu.edu"
-role :web, "houghton.kbs.msu.edu"
-role :db,  "houghton.kbs.msu.edu", :primary => true
+role :app, 'sebewa.kbs.msu.edu'
+role :web, 'sebewa.kbs.msu.edu'
+role :db,  'sebewa.kbs.msu.edu', :primary => true
 
 namespace :deploy do
   namespace :mongrel do
@@ -53,4 +54,12 @@ end
 desc "Link in the production database.yml"
 task :link_production_db do
   run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
+end
+
+task :after_update_code, :roles => :app do
+  %w{publications images}.each do |share|
+    run "rm -rf #{release_path}/public/#{share}"
+    run "mkdir -p #{shared_path}/system/#{share}"
+    run "ln -nfs #{shared_path}/system/#{share} #{release_path}/public/#{share}"
+  end
 end

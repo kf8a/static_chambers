@@ -1,5 +1,4 @@
 require 'gsl'
-#require 'stat_array'
 
 class Array
 

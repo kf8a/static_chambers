@@ -9,6 +9,7 @@ class UserSessionsController < ApplicationController
 
   def create
     @user_session = UserSession.new(params[:user_session])
+    p params #['openid.identity']
     @user_session.openid_identifier = params[:user_session]['openid_identifier']
     @user_session.save do |result|
       if result

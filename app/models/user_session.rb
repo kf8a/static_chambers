@@ -8,29 +8,31 @@ class UserSession < Authlogic::Session::Base
   def save(&block)
     p 'saving'
     p self
-    p self.openid_identifier
-    p openid_identifier
     if authenticating_with_openid?
+      p 'with openid'
       raise ArgumentError.new("You must supply a block to authenticate with OpenID") unless block_given?
 
       controller.send(:authenticate_with_open_id, openid_identifier) do |result, openid_identifier|
+        p !result
         if !result.successful?
           errors.add_to_base(result.message)
           yield false
           return
         end
-
+        p 'success'
         record = klass.find_by_openid_identifier(openid_identifier)
-
+        p 'finding record'
         if !record
           errors.add(:openid_identifier, "did not match any users in our database, have you set up your account to use OpenID?")
           yield false
           return
         end
-
+        
         self.unauthorized_record = record
+        p 'go to super'
         super
       end
+      p 'after controller send'
     else
       super
     end

@@ -118,7 +118,7 @@ class RunsController < ApplicationController
 
   def destroy
     @run = Run.find(params[:id])
-    @run.destroy
+#    @run.destroy
     redirect_to runs_url
   end
 

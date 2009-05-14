@@ -46,9 +46,22 @@ class Flux < ActiveRecord::Base #CachedModel
   end
   
   def headspace
-    begin
-      (incubation.avg_height_cm * 745)/1000 + self.incubation.lid.volume
-    rescue NoMethodError
+    if 'Z' == incubation.lid 
+      // compute gas bucket volume
+      return 1/4 * Math::PI * (26 + 0.094697 * incubation.avg_height_cm)^2 * incubation.avg_height_cm
+    else
+      begin
+        (incubation.avg_height_cm * 745)/1000 + self.incubation.lid.volume
+      rescue NoMethodError
+        return NaN
+      end
+    end
+  end
+  
+  def surface_area 
+    if 'Z' == incubation.lid
+      return 1/4 * Math::PI * (26 + 0.094697 * incubation.avg_height_cm)^2
+    else
       return NaN
     end
   end

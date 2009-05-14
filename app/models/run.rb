@@ -34,17 +34,15 @@ class Run < ActiveRecord::Base
     self.save
     reader.each do | row |
       next if row[0].nil?
-      incubation = incubations.find_by_treatment_and_replicate(row[0],row[1])
+      incubation = incubations.find_by_treatment_and_replicate_and_chamber(row[0],row[1], row[2])
       if incubation.nil?
         incubation = Incubation.new
         incubation.treatment = row[0]
         incubation.replicate = row[1]
+        incubation.chamber = row[2]
         incubation.lid = Lid.find_by_name(row[4])
 
-        incubation.height_1_cm = row[5]
-        incubation.height_2_cm = row[6]
-        incubation.height_3_cm = row[7]
-        incubation.height_4_cm = row[8]
+        incubation.avg_height_cm = (row[5]+row[6]+row[7]+row[8])/4
         incubation.soil_temperature = row[9]
         
         self.incubations << incubation

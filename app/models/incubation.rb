@@ -5,8 +5,7 @@ class Incubation < ActiveRecord::Base #CachedModel
   
   def plot(compound_id)
     f = File.dirname(__FILE__) + "/../../tmp/incubation_" + self.id.to_s + ".png"
-    fluxes = self.fluxes.find(:first, :conditions => ['compound_id = ?', compound_id])
-    
+    fluxes = self.fluxes.find(:first, :conditions => ['compound_id = ?', compound_id])  
   end
   
 end

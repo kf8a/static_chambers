@@ -47,9 +47,7 @@ class Flux < ActiveRecord::Base #CachedModel
   
   def headspace
     begin
-      height = incubation.height_1_cm + incubation.height_2_cm + incubation.height_3_cm + incubation.height_4_cm
-      height = height/4
-      (height * 745)/1000 + self.incubation.lid.volume
+      (incubation.avg_height_cm * 745)/1000 + self.incubation.lid.volume
     rescue NoMethodError
       return NaN
     end

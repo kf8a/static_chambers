@@ -1,5 +1,5 @@
 set :application, "webgas"
-set :repository,  "/Users/bohms/code/webgas1.5"
+set :repository,  "/Users/bohms/code/webgas"
 set :scm, :git
 
 # If you aren't deploying to /u/apps/#{application} on the target

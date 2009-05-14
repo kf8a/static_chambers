@@ -48,7 +48,7 @@ class Flux < ActiveRecord::Base #CachedModel
   def headspace
     if 'Z' == incubation.lid 
       // compute gas bucket volume
-      return 1/4 * Math::PI * (26 + 0.094697 * )^2 * (incubation.avg_height_cm - 1) # one cm from the top of the bucket to the mark
+      return 1/4 * Math::PI * (26 + 0.094697 * (incubation.avg_height_cm - 1))^2 * (incubation.avg_height_cm - 1) # one cm from the top of the bucket to the mark
     else
       begin
         (incubation.avg_height_cm * 745)/1000 + self.incubation.lid.volume

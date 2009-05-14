@@ -40,10 +40,10 @@ class Run < ActiveRecord::Base
         incubation.treatment = row[0]
         incubation.replicate = row[1]
         incubation.chamber = row[2]
-        incubation.lid = Lid.find_by_name(row[4])
+        incubation.lid = Lid.find_by_name(row[5])
 
-        incubation.avg_height_cm = (row[5]+row[6]+row[7]+row[8])/4
-        incubation.soil_temperature = row[9]
+        incubation.avg_height_cm = (row[6]+row[7]+row[8]+row[9])/4
+        incubation.soil_temperature = row[10]
         
         self.incubations << incubation
         incubation.save
@@ -58,9 +58,9 @@ class Run < ActiveRecord::Base
           flux.compound = compound
           incubation.fluxes << flux
         end
-        sample.minutes =  row[13] unless row[13].nil?
+        sample.minutes =  row[14] unless row[14].nil?
         sample.comment = row[COMMENT[compound.name]]
-        sample.vial = row[3]
+        sample.vial = row[4]
         sample.compound = compound
         sample.run = self
         p row[13]

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-    acts_as_authentic :validate_fields=>false, :logout_on_timeout => true, :validate_password_field => false
+    acts_as_authentic 
     
     has_many :group_affiliations
     has_many :groups, :through => :group_affiliations

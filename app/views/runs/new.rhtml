@@ -11,7 +11,7 @@
 	<label for="run_comment">Comment</label>
 	<%= f.text_area :comment, "rows" => 3 %>
 </p>
-<%= f.submit 'Create' %>
+<%= f.submit 'Create', :disable_with => "Creating&hellip;" %>
 <% end %>
 
 <%= link_to 'Back', runs_path %>

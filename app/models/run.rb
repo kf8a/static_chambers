@@ -42,7 +42,7 @@ class Run < ActiveRecord::Base
         incubation.chamber = row[2]
         incubation.lid = Lid.find_by_name(row[5])
 
-        incubation.avg_height_cm = (row[6]+row[7]+row[8]+row[9])/4
+        incubation.avg_height_cm = (row[6].to_f+row[7].to_f+row[8].to_f+row[9].to_f)/4
         incubation.soil_temperature = row[10]
         
         self.incubations << incubation

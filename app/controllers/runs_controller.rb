@@ -1,7 +1,7 @@
 class RunsController < ApplicationController
 
   before_filter :set_content_type, :only => :show
-  before_filter :require_user #unless ::RAILS_ENV == 'development'
+  before_filter :require_user unless ::RAILS_ENV == 'development'
 
   def index
    # person = Person.find(session[:user_id])
@@ -118,7 +118,7 @@ class RunsController < ApplicationController
 
   def destroy
     @run = Run.find(params[:id])
-#    @run.destroy
+    @run.destroy
     redirect_to runs_url
   end
 

@@ -1,4 +1,5 @@
 <h1><%= @run.name %></h1>
+<%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
 
 <%= link_to 'Back', runs_path %>
 <p>

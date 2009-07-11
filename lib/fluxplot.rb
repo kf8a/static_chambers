@@ -60,7 +60,7 @@ class Fluxplot
       "class" => tag,
       "stroke" => stroke,
       "fill" => fill,
-      "onclick" => "new Ajax.Updater('flux_#{id}','/runs/#{id}/toggle_point?seconds=#{x}', {asynchronous:true, evalScripts:true, parameters: 'product[name]=authenticity_token=' + window._token}); return false;"
+      "onclick" => "new Ajax.Updater('flux_#{id}','/runs/#{id}/toggle_point?seconds=#{x}', {asynchronous:true, evalScripts:true, parameters: 'authenticity_token=' + window._token}); return false;"
     })    
   end
   

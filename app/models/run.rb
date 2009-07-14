@@ -62,11 +62,9 @@ class Run < ActiveRecord::Base
         end
         sample.minutes =  row[14] unless row[14].nil?
         sample.comment = row[COMMENT[compound.name]]
-        sample.vial = row[4]
+        sample.vial = row[3]
         sample.compound = compound
         sample.run = self
-        p row[13]
-        p sample
         flux.samples << sample
       end
       self.save

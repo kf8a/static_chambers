@@ -36,7 +36,9 @@ class Run < ActiveRecord::Base
     self.save
     reader.each do | row |
       next if row[0].nil?
+      p [row[0], row[1],row[2]]
       incubation = incubations.find_by_treatment_and_replicate_and_chamber(row[0],row[1], row[2])
+      p incubation
       if incubation.nil?
         incubation = Incubation.new
         incubation.treatment = row[0]
@@ -62,7 +64,7 @@ class Run < ActiveRecord::Base
         end
         sample.minutes =  row[14] unless row[14].nil?
         sample.comment = row[COMMENT[compound.name]]
-        sample.vial = row[3]
+        sample.vial = row[4]
         sample.compound = compound
         sample.run = self
         flux.samples << sample

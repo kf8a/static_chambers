@@ -17,8 +17,10 @@ class Run < ActiveRecord::Base
   def data=(file_contents)
     reader = CSV.parse(file_contents)
     reader.each do | data |
-      do_sample(data) if data[0].strip.downcase == "sample"
-      do_standard(data) if data[0].strip.downcase == "standard"
+      # set test to an empty string in case a cell in column a is empty
+      test = data[0] || ''
+      do_sample(data) if test.strip.downcase == "sample"
+      do_standard(data) if test.strip.downcase == "standard"
     end
     self.save
   end

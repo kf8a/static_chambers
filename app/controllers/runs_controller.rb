@@ -74,7 +74,7 @@ class RunsController < ApplicationController
   end
 
   def export_xls
-    @run = Fun.find(params[:id])
+    @run = Run.find(params[:id])
     headers['Content-Type'] = "application/vnd.ms-excel" 
     headers['Content-Disposition'] = %Q{attachment; filename="#{@run.name}.xls"}
     headers['Cache-Control'] = ''

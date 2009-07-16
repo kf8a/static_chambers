@@ -22,7 +22,7 @@ Run on: <%= @run.run_on %><br/>
 <tr>
 	<td>T<%=incubation.treatment %>R<%= incubation.replicate %></td>
   <% incubation.fluxes.each do | flux | %>
-  <td><%= render :partial => 'flux', :locals => {:flux => flux} %>
+  <td><%= render :partial => 'flux', :locals => {:flux => flux, :notice => nil} %>
   </td>
   <% end %>
 </tr>

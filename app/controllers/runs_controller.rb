@@ -28,7 +28,7 @@ class RunsController < ApplicationController
   def toggle_point
     flux = Flux.find(params[:id])
     if flux.incubation.run.approved
-      render :nothing => true
+      render :partial => 'flux', :locals => {:flux => flux, :notice => 'Only unapproved runs can be modified. Refresh the page.'}
       return
     end
           

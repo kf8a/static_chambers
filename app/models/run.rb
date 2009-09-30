@@ -41,7 +41,7 @@ class Run < ActiveRecord::Base
         incubation = Incubation.new
         incubation.treatment = row[0]
         incubation.replicate = row[1]
-        incubation.chamber = row[2]
+        incubation.chamber = row[3]
         incubation.lid = Lid.find_by_name(row[5])
 
         incubation.avg_height_cm = (row[6].to_f+row[7].to_f+row[8].to_f+row[9].to_f)/4

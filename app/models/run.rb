@@ -33,6 +33,7 @@ class Run < ActiveRecord::Base
     reader.shift
     self.sampled_on = reader.shift[0]
     reader.shift
+    reader.shift if name ~= /GLBRC/
     self.save
     reader.each do | row |
       next if row[0].nil?      

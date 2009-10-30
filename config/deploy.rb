@@ -22,6 +22,14 @@ role :web, 'sebewa.kbs.msu.edu'
 role :db,  'sebewa.kbs.msu.edu', :primary => true
 
 namespace :deploy do
+  namespace :thin do
+     [:stop, :start, :restart].each do |t|
+       desc "#{t.to_s.capitalize} the thin appserver"
+       task t, :roles => :app do
+         invoke_command "thin -C /etc/thin/webgas.yml #{t.to_s}"
+       end
+     end
+   end
   namespace :mongrel do
     [ :stop, :start, :restart ].each do |t|
       desc "#{t.to_s.capitalize} the mongrel appserver"

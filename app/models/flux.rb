@@ -110,7 +110,7 @@ class Flux < ActiveRecord::Base #CachedModel
   end
   
   def maxx
-    samples.collect {|x| x.seconds}.compact.max
+    samples.collect {|x| x.seconds}.compact.max + 10
     #250
   end
   

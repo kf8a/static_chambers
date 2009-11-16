@@ -39,12 +39,12 @@ module RunsHelper
       dot_size = ((maxy)*0.05)
       dot_size = 2 if dot_size < 2
 
-      output = Fluxplot.new(200,200,maxx, maxy)
+      output = Fluxplot.new(200,200,maxx * x_scale, maxy)
       flux.samples.each do |sample|
         next if sample.ppm.nil?
-        output.add_point(sample.seconds, sample.ppm*m, flux.id, sample.excluded)
+        output.add_point(sample.seconds * x_scale, sample.ppm*m, flux.id, sample.excluded)
       end
-      output.add_line(0, intercept, maxx, y2)
+      output.add_line(0, intercept, maxx * x_scale, y2)
       
       output.add_line(0,maxy,-10,maxy)
       output.to_s

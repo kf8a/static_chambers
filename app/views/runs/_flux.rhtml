@@ -1,9 +1,6 @@
 <div id="flux_<%=flux.id%>">
-  <% if notice %>
-    <span><%= notice %></span>
-  <% else %>
 	  <%= plot(flux) %>
-	<% end %>
+
 
 	<br/>Flux: <%= number_with_precision(flux.flux)%> g/ha day<br/>
 	<%=h flux.comment %>

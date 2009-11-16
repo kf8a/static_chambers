@@ -76,7 +76,7 @@ class Flux < ActiveRecord::Base #CachedModel
   end
   
   def toggle_point(seconds)
-    samples.find_by_seconds(seconds.to_i/ x_scale).toggle!('excluded')
+    samples.find_by_seconds(seconds).toggle!('excluded')
   end
   
   def maxy 

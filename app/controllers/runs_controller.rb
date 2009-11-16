@@ -36,18 +36,15 @@ class RunsController < ApplicationController
 
   def toggle_point
     flux = Flux.find(params[:id])
-    if flux.incubation.run.approved
-      render :partial => 'flux', :locals => {:flux => flux, :notice => 'Only unapproved runs can be modified. Refresh the page.'}
-      return
-    end
+    if !flux.incubation.run.approved
           
  #   if (flux.incubation.run.group.people.any? {|p| p.id == session[:user_id]})
       flux.toggle_point(params[:seconds])
 
-      render :partial => 'flux', :locals => {:flux => flux, :notice => nil}
-  #  else
-  #    render :nothing => true
-  #  end
+      render :partial => 'flux', :locals => {:flux => flux}
+    else
+      render :nothing => true
+    end
   end
 
   def create

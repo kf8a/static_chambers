@@ -1,20 +1,21 @@
 require 'rexml/document'
 
 class Fluxplot
-  def initialize(width, height,maxx, maxy)
+  def initialize(width, height,maxx, maxy, x_scale)
     @doc = REXML::Document.new
     @root = @doc.add_element("svg:svg", {
       "width" => width,
       "height" => height,
-      "viewBox" => "-10 -10 #{maxx+10} #{maxy+10}",
+      "viewBox" => "-10 -10 #{maxx* x_scale +10} #{maxy+10}",
     })
     # @graph = @root.add_element("svg:g",{
     #       "transform" => "translate(0 #{maxy}) "  # scale(1,-1)
     # })
     @graph = @root
 
+    @x_scale = x_scale
     @maxy = maxy
-    @maxx = maxx
+    @maxx = maxx * @x_scale
     @dot_size = ((maxy)*0.05)
     @dot_size = 2 if @dot_size < 2
     
@@ -34,9 +35,9 @@ class Fluxplot
   
   def add_line(x1,y1,x2,y2)
     @graph.add_element("svg:line", {
-       "x1" => x1,
+       "x1" => x1 * @x_scale,
        "y1" => @maxy-y1,
-       "x2" => x2,
+       "x2" => x2 * @x_scale,
        "y2" => @maxy-y2,
        'class' => 'line',
        "style" => "stroke :black; stroke-width :#{@dot_size/2}"
@@ -54,7 +55,7 @@ class Fluxplot
       fill = "red"
     end
     @graph.add_element("svg:circle", {
-      "cx" => x,
+      "cx" => x * @x_scale,
       "cy" => @maxy-y,
       "r" => @dot_size,
       "class" => tag,

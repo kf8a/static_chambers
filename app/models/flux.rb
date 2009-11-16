@@ -76,7 +76,7 @@ class Flux < ActiveRecord::Base #CachedModel
   end
   
   def toggle_point(seconds)
-    samples.find_by_seconds((seconds/x_scale).to_i).toggle!('excluded')
+    samples.find_by_seconds(seconds).toggle!('excluded')
   end
   
   def maxy 
@@ -112,10 +112,6 @@ class Flux < ActiveRecord::Base #CachedModel
   def maxx
     samples.collect {|x| x.seconds}.compact.max + 10
     #250
-  end
-  
-  def x_scale
-    250/maxx
   end
   
   def chisq(multiplier=1)

@@ -20,7 +20,7 @@ module RunsHelper
       maxy = flux.maxy * m
       maxx = flux.maxx
       
-      x_scale = flux.x_scale
+      x_scale = 250 / maxx
       
       #maxy += (maxy * 0.2)
       #maxx += (maxx * 0.2)

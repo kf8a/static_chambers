@@ -93,11 +93,13 @@ class RunsController < ApplicationController
 
   def delete_data
     @run = Run.find(params[:id])
-    @run.samples.each do | sample |
-      sample.ppm = nil
-      sample.response = nil
-      sample.excluded = false
-      sample.save
+    unless @run.approved
+      @run.samples.each do | sample |
+        sample.ppm = nil
+        sample.response = nil
+        sample.excluded = false
+        sample.save
+      end
     end
     redirect_to :action => :index
   end

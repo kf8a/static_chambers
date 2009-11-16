@@ -3,8 +3,8 @@
   <td><%=h run.send(column.name) %></td>
 <% end %>
 <td><% p = run.number_of_points %> <%=p[0]%>/<%=p[1]%></td>
-<td><%= link_to 'Data', load_data_run_path(run)   %></td>
+<td><%= link_to 'Data', load_data_run_path(run) unless run.approved or run.released %></td>
   <td><%= link_to 'QC', run_path(run) %></td>
-<td><%= link_to 'Delete data', delete_data_run_path(run), :confirm => 'Are your sure you want to delete this data',:method => :post %></td>
-	<td><%= link_to 'Destroy', run_path(run), :confirm => 'Are you sure?', :method => :delete %></td>
+<td><%= link_to 'Delete data', delete_data_run_path(run), :confirm => 'Are your sure you want to delete this data',:method => :post unless run.approved or run.released %></td>
+	<td><%= link_to 'Destroy', run_path(run), :confirm => 'Are you sure?', :method => :delete unless run.approved or run.released%></td>
 </tr>

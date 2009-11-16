@@ -35,7 +35,7 @@ class RunsController < ApplicationController
  #   if (flux.incubation.run.group.people.any? {|p| p.id == session[:user_id]})
       flux.toggle_point(params[:seconds])
 
-      render :partial => 'flux', :locals => {:flux => flux}
+      render :partial => 'flux', :locals => {:flux => flux, :notice => nil}
   #  else
   #    render :nothing => true
   #  end
@@ -112,7 +112,7 @@ class RunsController < ApplicationController
     @run = Run.find(params[:id])
     @run.toggle :approved
     @run.save
-    redirect_to runs_url
+    redirect_to run_url(params[:id])
   end
 
 

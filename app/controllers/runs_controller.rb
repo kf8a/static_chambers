@@ -9,8 +9,17 @@ class RunsController < ApplicationController
    #  groups = person.groups #.find(:all, :order => 'approved, name')
    #  @runs  = groups.collect do |group|
    #    group.runs
-   #  end
-    @runs = Run.find(:all)
+   #  
+   @state = 'waiting'
+   @runs = Run.find(:all, :conditions => ['approved = ?', false])
+   if params[:approved]
+     @state = 'approved'
+     @runs = Run.find(:all, :conditions => ['approved = ?', true])
+   end
+   if params[:released]
+     @state = 'released'
+     @runs = Run.find(:all, :conditions => ['released = ?', true])
+   end
   end
 
   def show
@@ -111,6 +120,13 @@ class RunsController < ApplicationController
   def approve
     @run = Run.find(params[:id])
     @run.toggle :approved
+    @run.save
+    redirect_to run_url(params[:id])
+  end
+  
+  def release
+    @run = Run.find(params[:id])
+    @run.toggle :released
     @run.save
     redirect_to run_url(params[:id])
   end

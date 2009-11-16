@@ -110,8 +110,8 @@ class Flux < ActiveRecord::Base #CachedModel
   end
   
   def maxx
-    #samples.collect {|x| x.seconds}.compact.max
-    250
+    samples.collect {|x| x.seconds}.compact.max
+    #250
   end
   
   def chisq(multiplier=1)

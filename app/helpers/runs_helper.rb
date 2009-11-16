@@ -6,6 +6,12 @@ module RunsHelper
     approve_string = 'un-approve' if run.approved
     return approve_string
   end
+  
+  def release_string(run)
+    release_string = 'release'
+    release_string = 'recall' if run.released
+    return release_string
+  end
 
   def plot(flux)
     return if flux.samples.empty?

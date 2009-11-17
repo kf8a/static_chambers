@@ -10,14 +10,14 @@ class RunsController < ApplicationController
    #  @runs  = groups.collect do |group|
    #    group.runs
    #  
-   @state = 'waiting'
+   @state = 'Initial'
    @runs = Run.find(:all, :conditions => ['approved = ?', false])
    if params[:approved]
      @state = 'approved'
      @runs = Run.find(:all, :conditions => ['approved = ?', true])
    end
    if params[:released]
-     @state = 'released'
+     @state = 'Final'
      @runs = Run.find(:all, :conditions => ['released = ?', true])
    end
   end

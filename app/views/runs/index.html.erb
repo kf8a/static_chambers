@@ -1,5 +1,5 @@
-<h1>Listing runs</h1>
-<%= link_to 'waiting', :action => :index %> <%= link_to 'approved', {:action => :index, :approved => 't'}%> <%= link_to 'released', {:action => :index, :released => 't'}%>
+<h1>
+<%= link_to 'Initial', :action => :index %> <%= link_to 'Approved', {:action => :index, :approved => 't'}%> <%= link_to 'Final', {:action => :index, :released => 't'}%></h1>
 <h2><%= @state %></h2>
 <table>
   <tr>

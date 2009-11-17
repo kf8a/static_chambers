@@ -24,7 +24,7 @@ Run on: <%= @run.run_on %><br/>
 	<td>T<%=incubation.treatment %>R<%= incubation.replicate %></td>
 	<% 0.upto(2) do |i| %>
 	  <% flux = incubation.fluxes[i]%>
-    <td><%= flux.compound_id %><%= i %><%= render :partial => 'flux', :locals => {:flux => flux} %></td>
+    <td><%= render :partial => 'flux', :locals => {:flux => flux} %></td>
   <% end %>
 </tr>
 <% end %>

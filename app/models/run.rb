@@ -1,4 +1,4 @@
-require 'csv'
+require 'csv' if 
 
 class Run < ActiveRecord::Base
   has_many :calibrations, :dependent => :destroy
@@ -16,6 +16,7 @@ class Run < ActiveRecord::Base
   
   def data=(file_contents)
     reader = CSV.parse(file_contents)
+    reader = FasterCSV.parse(file_contents) unless RUBY_VERSION > "1.9"
     reader.each do | data |
       # set test to an empty string in case a cell in column a is empty
       test = data[0] || ''
@@ -33,7 +34,7 @@ class Run < ActiveRecord::Base
     reader.shift
     self.sampled_on = reader.shift[0]
     reader.shift
-    reader.shift if name =~ /GLBRC/
+    reader.shift if self.name =~ /GLBRC/
     self.save
     reader.each do | row |
       next if row[0].nil?      
@@ -43,8 +44,11 @@ class Run < ActiveRecord::Base
         incubation.treatment = row[0]
         incubation.replicate = row[1]
         incubation.chamber = row[3]
+        
+        p row[5]
         incubation.lid = Lid.find_by_name(row[5])
-
+        p incubation.lid
+        
         incubation.avg_height_cm = (row[6].to_f+row[7].to_f+row[8].to_f+row[9].to_f)/4
         incubation.soil_temperature = row[10]
         

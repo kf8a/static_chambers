@@ -1,4 +1,4 @@
-require 'csv' if 
+require 'csv' 
 
 class Run < ActiveRecord::Base
   has_many :calibrations, :dependent => :destroy

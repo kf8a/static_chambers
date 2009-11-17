@@ -14,7 +14,7 @@ class RunsController < ApplicationController
    @runs = Run.find(:all, :conditions => ['approved = ?', false])
    if params[:approved]
      @state = 'approved'
-     @runs = Run.find(:all, :conditions => ['approved = ?', true])
+     @runs = Run.find(:all, :conditions => ['approved = ? and released = ?', true, false])
    end
    if params[:released]
      @state = 'Final'

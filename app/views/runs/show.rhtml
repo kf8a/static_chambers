@@ -15,17 +15,16 @@ Run on: <%= @run.run_on %><br/>
 
 <tr>
 	<th>Sample</th>
-	<th>N2O<br/>Y = <%= incubation.fluxes[0].maxy%> ppm, X = <%= incubation.fluxes[0].maxx%> min</th>
-	<th>CO2<br/>Y = <%= incubation.fluxes[1].maxy%> ppm, X = <%= incubation.fluxes[1].maxx%> min</th>
-	<th>CH4<br/>Y = <%= incubation.fluxes[2].maxy%> ppm, X = <%= incubation.fluxes[2].maxx %> min</th>
+	<% 0.upto(2) do |i| %>
+	  <th><%= incubation.fluxes[i].compound.name.upcase %><br/>Y = <%= incubation.fluxes[0].maxy %> ppm, X = <%= incubation.fluxes[0].maxx %> min</th>
+	<% end %>
 </tr>
 
 <tr>
 	<td>T<%=incubation.treatment %>R<%= incubation.replicate %></td>
 	<% 0.upto(2) do |i| %>
-	<% flux = incubation.fluxes[i]%>
-  <td><%= flux.compound_id %><%= render :partial => 'flux', :locals => {:flux => flux} %>
-  </td>
+	  <% flux = incubation.fluxes[i]%>
+    <td><%= flux.compound_id %><%= i %><%= render :partial => 'flux', :locals => {:flux => flux} %></td>
   <% end %>
 </tr>
 <% end %>

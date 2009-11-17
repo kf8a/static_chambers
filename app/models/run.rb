@@ -84,6 +84,7 @@ class Run < ActiveRecord::Base
     Compound.find(:all).each do |compound|
       sample = samples.find_by_vial_and_compound_id(data[1].to_i, compound.id)
       unless sample.nil?
+        p data
         sample.response = data[RESPONSE[compound.name]]
         sample.ppm = data[PPM[compound.name]]
         sample.excluded = true if sample.ppm < 0

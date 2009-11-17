@@ -1,6 +1,6 @@
 class Incubation < ActiveRecord::Base #CachedModel 
   belongs_to :run
-  has_many :fluxes, :dependent => :destroy
+  has_many :fluxes, :dependent => :destroy, :order => 'compound_id'
   belongs_to :lid
   
   def plot(compound_id)

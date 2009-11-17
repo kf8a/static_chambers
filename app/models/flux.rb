@@ -82,7 +82,7 @@ class Flux < ActiveRecord::Base #CachedModel
   def maxy 
     max = case 
       when compound.name == 'co2' then 4000
-      when compound.name == 'ch4' then 6
+      when compound.name == 'ch4' then 2
       when compound.name == 'n2o' then 1 #0.7
     end
     return max

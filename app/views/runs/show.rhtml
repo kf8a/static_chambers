@@ -16,7 +16,7 @@ Run on: <%= @run.run_on %><br/>
 <tr>
 	<th>Sample</th>
 	<% 0.upto(2) do |i| %>
-	  <th><%= incubation.fluxes[i].compound.name.upcase %><br/>Y = <%= incubation.fluxes[0].maxy %> ppm, X = <%= incubation.fluxes[0].maxx %> min</th>
+	  <th><%= incubation.fluxes[i].compound.name.upcase %><br/>Y = <%= incubation.fluxes[i].maxy %> ppm, X = <%= incubation.fluxes[i].maxx %> min</th>
 	<% end %>
 </tr>
 

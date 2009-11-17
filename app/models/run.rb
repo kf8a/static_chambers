@@ -45,7 +45,7 @@ class Run < ActiveRecord::Base
         incubation.chamber = row[3]
         
         p row[5]
-        incubation.lid = Lid.find_by_name(row[5])
+        incubation.lid = Lid.find_by_name(row[5].upcase)
         p incubation.lid
         
         incubation.avg_height_cm = (row[6].to_f+row[7].to_f+row[8].to_f+row[9].to_f)/4

@@ -15,8 +15,7 @@ class Run < ActiveRecord::Base
   end
   
   def data=(file_contents)
-    reader = CSV.parse(file_contents) if RUBY_VERSION > "1.9"
-    reader = FasterCSV.parse(file_contents) unless RUBY_VERSION > "1.9"
+    reader = CSV.parse(file_contents)
     reader.each do | data |
       # set test to an empty string in case a cell in column a is empty
       test = data[0] || ''
@@ -28,8 +27,7 @@ class Run < ActiveRecord::Base
     
   def setup=(file_contents)
     p file_contents
-    reader = CSV.parse(file_contents) if RUBY_VERSION > "1.9"
-    reader = FasterCSV.parse(file_contents) unless RUBY_VERSION > "1.9"
+    reader = CSV.parse(file_contents) 
     self.name = reader.shift[0]
     reader.shift
     reader.shift

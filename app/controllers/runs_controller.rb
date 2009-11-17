@@ -11,14 +11,14 @@ class RunsController < ApplicationController
    #    group.runs
    #  
    @state = 'Uploaded'
-   @runs = Run.find(:all, :conditions => ['approved = ?', false])
+   @runs = Run.find(:all, :conditions => ['approved = ?', false], :order => 'sampled_on')
    if params[:approved]
      @state = 'Approved'
-     @runs = Run.find(:all, :conditions => ['approved = ? and released = ?', true, false])
+     @runs = Run.find(:all, :conditions => ['approved = ? and released = ?', true, false], :order => 'sampled_on')
    end
    if params[:released]
      @state = 'Posted'
-     @runs = Run.find(:all, :conditions => ['released = ?', true])
+     @runs = Run.find(:all, :conditions => ['released = ?', true], :order => 'sampled_on')
    end
   end
 

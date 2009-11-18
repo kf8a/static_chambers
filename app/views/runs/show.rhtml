@@ -6,6 +6,7 @@
 Sampled on: <%= @run.sampled_on %><br/>
 Run on: <%= @run.run_on %><br/>
 </p>
+<p><%= run.comment %></p>
 
 <%= button_to approve_string(@run), {:action => :approve, :id => @run} unless @run.released %>
 <%= button_to release_string(@run), {:action => :release, :id => @run} if @run.approved %>

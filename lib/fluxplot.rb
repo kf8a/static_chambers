@@ -45,6 +45,20 @@ class Fluxplot
   end
   
   def add_point(x, y, id, excluded)
+    if y > @maxy 
+      y = @maxy
+        @graph.add_element("svg:rectangle", {
+          "cx" => x * @x_scale,
+          "cy" => @maxy-y,
+          "x" => @dot_size,
+          "y"=> @dot_size,
+          "class" => tag,
+          "stroke" => stroke,
+          "fill" => fill,
+          "onclick" => "new Ajax.Updater('flux_#{id}','/runs/#{id}/toggle_point?seconds=#{x}', {asynchronous:true, evalScripts:true, parameters: 'authenticity_token=' + window._token}); return false;"
+        })
+    end
+    
     if excluded
       tag = "excluded" 
       stroke = "grey"
@@ -53,12 +67,6 @@ class Fluxplot
       tag = "included"
       stroke = "black"
       fill = "red"
-    end
-    if y > @maxy 
-      y = @maxy
-    end
-    if y < 0 
-      y = -1
     end
     @graph.add_element("svg:circle", {
       "cx" => x * @x_scale,

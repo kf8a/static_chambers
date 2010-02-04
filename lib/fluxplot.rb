@@ -54,6 +54,12 @@ class Fluxplot
       stroke = "black"
       fill = "red"
     end
+    if y > @maxy 
+      y = @maxy
+    end
+    if y < 0 
+      y = -1
+    end
     @graph.add_element("svg:circle", {
       "cx" => x * @x_scale,
       "cy" => @maxy-y,

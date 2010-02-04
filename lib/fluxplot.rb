@@ -67,6 +67,18 @@ class Fluxplot
           "onclick" => "new Ajax.Updater('flux_#{id}','/runs/#{id}/toggle_point?seconds=#{x}', {asynchronous:true, evalScripts:true, parameters: 'authenticity_token=' + window._token}); return false;"
         })
     end
+    if y < 0 
+         @graph.add_element("svg:rect", {
+           "x" => x * @x_scale,
+           "y" => @maxy - 10,
+           "width" => @dot_size,
+           "height"=> @dot_size,
+           "class" => tag,
+           "stroke" => stroke,
+           "fill" => fill,
+           "onclick" => "new Ajax.Updater('flux_#{id}','/runs/#{id}/toggle_point?seconds=#{x}', {asynchronous:true, evalScripts:true, parameters: 'authenticity_token=' + window._token}); return false;"
+         })
+     end
     
     @graph.add_element("svg:circle", {
       "cx" => x * @x_scale,

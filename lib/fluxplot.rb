@@ -45,6 +45,16 @@ class Fluxplot
   end
   
   def add_point(x, y, id, excluded)
+    
+    if excluded
+      tag = "excluded" 
+      stroke = "grey"
+      fill = "grey"
+    else
+      tag = "included"
+      stroke = "black"
+      fill = "red"
+    end
     if y > @maxy 
       y = @maxy
         @graph.add_element("svg:rectangle", {
@@ -59,15 +69,6 @@ class Fluxplot
         })
     end
     
-    if excluded
-      tag = "excluded" 
-      stroke = "grey"
-      fill = "grey"
-    else
-      tag = "included"
-      stroke = "black"
-      fill = "red"
-    end
     @graph.add_element("svg:circle", {
       "cx" => x * @x_scale,
       "cy" => @maxy-y,

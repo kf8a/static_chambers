@@ -56,10 +56,9 @@ class Fluxplot
       fill = "red"
     end
     if y > @maxy 
-      y = @maxy
         @graph.add_element("svg:rectangle", {
           "cx" => x * @x_scale,
-          "cy" => @maxy-y,
+          "cy" => @maxy,
           "x" => @dot_size,
           "y"=> @dot_size,
           "class" => tag,

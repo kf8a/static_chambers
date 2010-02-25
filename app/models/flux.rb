@@ -51,7 +51,8 @@ class Flux < ActiveRecord::Base #CachedModel
       return 1/4 * Math::PI * (26 + 0.094697 * (incubation.avg_height_cm - 1))^2 * (incubation.avg_height_cm - 1) # one cm from the top of the bucket to the mark
     else
       begin
-        (incubation.avg_height_cm * 745)/1000 + self.incubation.lid.volume
+        #TODO grab the lid heights
+        ((incubation.avg_height_cm-14) * 745)/1000 + self.incubation.lid.volume
       rescue NoMethodError
         return NaN
       end
@@ -89,7 +90,7 @@ class Flux < ActiveRecord::Base #CachedModel
   end
   
   def miny
-    return 0
+     0
   end
   
   def minx
@@ -98,7 +99,6 @@ class Flux < ActiveRecord::Base #CachedModel
   
   def maxx
     samples.collect {|x| x.seconds}.compact.max + 10
-    #250
   end
   
   def x_scale

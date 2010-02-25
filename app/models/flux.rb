@@ -86,23 +86,10 @@ class Flux < ActiveRecord::Base #CachedModel
       when compound.name == 'n2o' then 1 #0.7
     end
     return max
-
-#    max = samples.collect {|x| x.ppm }.compact.max 
-#    if max.nil?
-#      return NaN
-#    else
-#      return max
-#    end
   end
   
   def miny
     return 0
-    # min = samples.collect {|x| x.ppm}.compact.min
-    # if min.nil?
-    #   return NaN
-    # else
-    #   return min
-    # end
   end
   
   def minx

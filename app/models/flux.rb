@@ -46,7 +46,7 @@ class Flux < ActiveRecord::Base #CachedModel
   end
   
   def headspace
-    return NaN if incubation.lid
+    return NaN unless incubation.lid
     
     if 'Z' == incubation.lid.name
       # compute gas bucket volume

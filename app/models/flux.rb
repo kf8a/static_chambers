@@ -33,7 +33,6 @@ class Flux < ActiveRecord::Base #CachedModel
   
   def flux
     c0, c1 = fit
-    p ['flux', c1 * headspace/745 * 100 * 1440 / 22.4 * compound.mol_weigh, c1 * headspace/surface_area * 100 * 1440 / 22.4 * compound.mol_weight]
     f = c1 * headspace/surface_area * 100 * 1440 / 22.4 * compound.mol_weight #carbon or nitrogen 
     unless f.nan?
       self.flux=f
@@ -49,7 +48,6 @@ class Flux < ActiveRecord::Base #CachedModel
   def headspace
     if 'Z' == incubation.lid.name
       # compute gas bucket volume
-      p ['head', 1/4 * Math::PI * (26 + 0.094697 * (incubation.avg_height_cm))^2 * (incubation.avg_height_cm - 1), Math::PI * (((26 + 0.094697)/2)^2) * (incubation.avg_height_cm - 1)]   
       return Math::PI * (((26 + 0.094697)/2)^2) * (incubation.avg_height_cm - 1) # one cm from the top of the bucket to the mark
     else
       begin

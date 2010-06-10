@@ -33,7 +33,7 @@ class Flux < ActiveRecord::Base #CachedModel
   
   def flux
     c0, c1 = fit
-    f = c1 * headspace/745 * 100 * 1440 / 22.4 * compound.mol_weight #carbon or nitrogen 
+    f = c1 * headspace/surface_area * 100 * 1440 / 22.4 * compound.mol_weight #carbon or nitrogen 
     unless f.nan?
       self.flux=f
       self.save
@@ -65,7 +65,7 @@ class Flux < ActiveRecord::Base #CachedModel
     if 'Z' == incubation.lid
       return Math::PI * ((26 + 0.094697)/2)^2
     else
-      return NaN
+      return 745
     end
   end
   

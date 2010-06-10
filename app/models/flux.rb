@@ -36,8 +36,11 @@ class Flux < ActiveRecord::Base #CachedModel
     f = c1 * headspace/surface_area * 100 * 1440 / 22.4 * compound.mol_weight #carbon or nitrogen 
     unless f.nan?
       self.flux=f
-      self.save
+    else
+      self.flux = nil
     end
+    self.save
+    
     return f
   end
   

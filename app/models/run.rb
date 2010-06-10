@@ -44,9 +44,7 @@ class Run < ActiveRecord::Base
         incubation.replicate = row[1]
         incubation.chamber = row[3]
         
-        p row[5]
         incubation.lid = Lid.find_by_name(row[5].upcase)
-        p incubation.lid
         
         incubation.avg_height_cm = (row[6].to_f+row[7].to_f+row[8].to_f+row[9].to_f)/4
         incubation.soil_temperature = row[10]
@@ -84,7 +82,6 @@ class Run < ActiveRecord::Base
     Compound.find(:all).each do |compound|
       sample = samples.find_by_vial_and_compound_id(data[1].to_i, compound.id)
       unless sample.nil?
-        p data
         sample.response = data[RESPONSE[compound.name]]
         sample.ppm = data[PPM[compound.name]]
         sample.excluded = true if sample.ppm < 0

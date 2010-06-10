@@ -64,6 +64,7 @@ class Flux < ActiveRecord::Base #CachedModel
   end
   
   def surface_area 
+    return NaN unless incubation.lid
     if 'Z' == incubation.lid.name
       return Math::PI * ((26 + 0.094697)/2)**2
     else
